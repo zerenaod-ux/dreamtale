@@ -1,0 +1,27 @@
+name: library
+on:
+  schedule:
+    - cron: '41 15 * * 2,5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: library
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Write new safe stories
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+        run: python library.py 3
+      - name: Save
+        run: |
+          git config user.name "dreamtale-bot"; git config user.email "bot@users.noreply.github.com"
+          git add library docs/library.json; git diff --cached --quiet || { git commit -qm "library: new stories"; for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; sleep 5; done; }

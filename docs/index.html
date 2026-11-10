@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dreamtale - a bedtime story with your child's name</title>
+<style>
+:root{--bg:#141a45;--ink:#f6efd9;--mut:#b9b4dc;--card:#232a66;--acc:#ffd27a}
+@media (prefers-color-scheme:light){:root{--bg:#f3effa;--ink:#1d1a45;--mut:#5a5688;--card:#fff;--acc:#a36a00}}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Georgia,serif}main{max-width:680px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:30px;margin:.2em 0}p.s{color:var(--mut)}form,.card{background:var(--card);border-radius:18px;padding:18px;margin:16px 0}
+label{display:block;margin:10px 0 4px;color:var(--mut);font-size:15px}input,select,button{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid #8884;width:100%;box-sizing:border-box;background:transparent;color:inherit}
+button{background:var(--acc);color:#1d1a45;border:0;font-weight:bold;margin-top:14px;cursor:pointer}button.g{background:transparent;color:var(--ink);border:1px solid #8886}
+.scene{font-size:64px;text-align:center}.t{font-size:22px}.note{font-size:14px;color:var(--mut)}
+</style></head><body><main>
+<h1>🌙 Dreamtale</h1><p class="s">A calm bedtime story with your child's own name in it. Read aloud, free.</p>
+<form id="f"><label>Child's first name (only a first name, nothing else)</label><input id="n" maxlength="20" placeholder="Mia" autocomplete="off">
+<label>Favorite animal</label><select id="a"></select><label>Age</label><select id="b"><option value="2-4">2 to 4</option><option value="4-6" selected>4 to 6</option><option value="6-8">6 to 8</option></select>
+<button>Make tonight's story</button></form>
+<div id="out"></div>
+<p class="note">Privacy: the name and animal stay in your browser. Nothing is sent, saved or tracked. Stories are written to be gentle and end with sleep. A narrated video version of every story is available as a download (see link in the footer).</p>
+<p class="note" id="foot"></p>
+</main><script>
+const AN={bunny:'🐰',bear:'🐻',fox:'🦊',owl:'🦉',kitten:'🐱',puppy:'🐶',elephant:'🐘',turtle:'🐢',deer:'🦌',penguin:'🐧',dolphin:'🐬',lion:'🦁',koala:'🐨',hedgehog:'🦔',duckling:'🐥',dragon:'🐲',unicorn:'🦄',panda:'🐼',giraffe:'🦒',frog:'🐸'};
+const $=i=>document.getElementById(i);$('a').innerHTML=Object.keys(AN).map(k=>`<option value="${k}">${AN[k]} ${k}</option>`).join('');
+let LIB=[];fetch('library.json').then(r=>r.json()).then(j=>LIB=j).catch(()=>{});
+const cfg={product:''};if(cfg.product)$('foot').innerHTML='<a href="'+cfg.product+'">Narrated video stories</a>';
+function nm(s){s=(s||'').replace(/[^A-Za-zÀ-ɏ' -]/g,'').trim().split(' ')[0].slice(0,20);return s?s[0].toUpperCase()+s.slice(1):'Little One'}
+function fill(t,n,a){return t.replaceAll('{NAME}',n).replaceAll('{ANIMAL}',a)}
+let cur=0,list=[];
+$('f').onsubmit=e=>{e.preventDefault();speechSynthesis.cancel();const n=nm($('n').value),a=$('a').value,b=$('b').value;
+ const pool=LIB.filter(s=>s.band===b);if(!pool.length){$('out').innerHTML='<div class="card">Stories are loading, try again.</div>';return}
+ const s=pool[Math.floor(Math.random()*pool.length)];list=s.scenes.map(x=>({t:fill(x.text,n,a),e:x.emoji}));cur=0;
+ $('out').innerHTML=`<div class="card"><div class="t">${fill(s.title,n,a)}</div><div class="scene" id="em"></div><p id="tx"></p><button id="rd" type="button">▶ Read aloud</button><button class="g" id="nx" type="button">Next page</button></div>`;
+ show();$('nx').onclick=()=>{speechSynthesis.cancel();cur=Math.min(cur+1,list.length-1);show()};
+ $('rd').onclick=()=>{speechSynthesis.cancel();let i=cur;const go=()=>{if(i>=list.length)return;cur=i;show();const u=new SpeechSynthesisUtterance(list[i].t);u.rate=.78;u.pitch=.95;u.onend=()=>{i++;setTimeout(go,900)};speechSynthesis.speak(u)};go()}};
+function show(){$('em').textContent=AN[$('a').value]+' '+list[cur].e;$('tx').textContent=list[cur].t}
+</script></body></html>

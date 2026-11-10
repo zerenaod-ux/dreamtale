@@ -1,0 +1,20 @@
+[
+ {
+  "file": "2-4-sleepy-moon.json",
+  "title": "{NAME} and the Sleepy Moon",
+  "band": "2-4",
+  "scenes": 7
+ },
+ {
+  "file": "4-6-sleepy-moon.json",
+  "title": "{NAME} and the Sleepy Moon",
+  "band": "4-6",
+  "scenes": 8
+ },
+ {
+  "file": "6-8-sleepy-moon.json",
+  "title": "{NAME} and the Sleepy Moon",
+  "band": "6-8",
+  "scenes": 9
+ }
+]

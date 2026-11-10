@@ -1,0 +1,42 @@
+{
+ "title": "{NAME} and the Sleepy Moon",
+ "scenes": [
+  {
+   "text": "It was nearly bedtime, and {NAME} the little child sat by the window with a soft, sleepy {ANIMAL}.",
+   "place": "room",
+   "emoji": "🌙"
+  },
+  {
+   "text": "The moon was big and round and smiling. \"Time to rest,\" it whispered. \"Time to rest.\"",
+   "place": "night_sky",
+   "emoji": "🌕"
+  },
+  {
+   "text": "{NAME} and the {ANIMAL} tiptoed out into the quiet garden, where the flowers were folding their petals.",
+   "place": "garden",
+   "emoji": "🌷"
+  },
+  {
+   "text": "A little breeze hummed a slow song. The {ANIMAL} yawned a very big yawn, and {NAME} yawned too.",
+   "place": "meadow",
+   "emoji": "🍃"
+  },
+  {
+   "text": "They found a cloud as soft as a pillow, floating just above the grass. \"Time to rest,\" it whispered.",
+   "place": "clouds",
+   "emoji": "☁️"
+  },
+  {
+   "text": "{NAME} and the {ANIMAL} climbed on, and the cloud carried them gently over the hills and the sleepy sea.",
+   "place": "sea",
+   "emoji": "⭐"
+  },
+  {
+   "text": "The moon smiled once more. \"Time to rest,\" it whispered. And {NAME} closed their eyes, safe and cozy, and fell fast asleep. Goodnight, {NAME}.",
+   "place": "room",
+   "emoji": "🌙"
+  }
+ ],
+ "source": "fallback",
+ "band": "2-4"
+}
