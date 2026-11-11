@@ -20,7 +20,7 @@ button{background:var(--acc);color:#1d1a45;border:0;font-weight:bold;margin-top:
 const AN={bunny:'🐰',bear:'🐻',fox:'🦊',owl:'🦉',kitten:'🐱',puppy:'🐶',elephant:'🐘',turtle:'🐢',deer:'🦌',penguin:'🐧',dolphin:'🐬',lion:'🦁',koala:'🐨',hedgehog:'🦔',duckling:'🐥',dragon:'🐲',unicorn:'🦄',panda:'🐼',giraffe:'🦒',frog:'🐸'};
 const $=i=>document.getElementById(i);$('a').innerHTML=Object.keys(AN).map(k=>`<option value="${k}">${AN[k]} ${k}</option>`).join('');
 let LIB=[];fetch('library.json').then(r=>r.json()).then(j=>LIB=j).catch(()=>{});
-const cfg={product:''};if(cfg.product)$('foot').innerHTML='<a href="'+cfg.product+'">Narrated video stories</a>';
+const cfg={product:'https://mnaod.gumroad.com/l/helfgm'};if(cfg.product)$('foot').innerHTML='<a href="'+cfg.product+'">Narrated video stories</a>';
 function nm(s){s=(s||'').replace(/[^A-Za-zÀ-ɏ' -]/g,'').trim().split(' ')[0].slice(0,20);return s?s[0].toUpperCase()+s.slice(1):'Little One'}
 function fill(t,n,a){return t.replaceAll('{NAME}',n).replaceAll('{ANIMAL}',a)}
 let cur=0,list=[];
